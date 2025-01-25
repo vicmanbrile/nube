@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h2 class="title">Selecciona tu asiento</h2>
+        <div id="mapa_asientos" class="mapa"></div>
+    </div>
+
+    <form id="formulario">
+        <h1>Compra de Boletos</h1>
+        <h2>Confirmar Compra</h2>
+
+        <label for="name">Nombre completo</label>
+        <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
+
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+
+        <label for="asiento_seleccionado">Asiento seleccionado</label>
+        <input type="text" id="asiento_seleccionado" name="asiento_seleccionado" readonly>
+
+        <button type="submit">Comprar</button>
+    </form>
+
+    <script src="index.js"></script>
+</body>
+</html>
