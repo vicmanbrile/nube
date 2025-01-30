@@ -17,7 +17,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-session-name: victor_briseno
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assune: ${{ secrets.AWS_AIM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sincronizacion de archivos a S3
