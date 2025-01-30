@@ -16,7 +16,7 @@ jobs:
       - name: Identidad de AWS
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-session-name: victor_briseno
+          role-session-name: deploy_s3Github
           role-to-assune: ${{ secrets.AWS_AIM_ROLE }}
           aws-region: ${{ secrets.AWS_REGION }}
 
