@@ -1,14 +1,15 @@
+const URL_API = "https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/boletera_apilamda"
+
 const mapa = document.getElementById('mapa_asientos');
 const asiento_seleccionado = document.getElementById('asiento_seleccionado');
 
 const filas = 5;
 const columnas = 10;
  
-fetch("http://localhost:3001/aplicacion")
+fetch(URL_API, { method: "GET",})
     .then(response => response.json())
     .then((data)=>{
-        console.log(data)
-        var asientos_ocupados = data.asientos_ocupados;
+        var asientos_ocupados = JSON.parse(data.body).asientos_ocupados;
 
         for (let i = 1; i <= filas * columnas; i++) {
             const asiento = document.createElement('div');
