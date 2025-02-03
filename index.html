@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boletos</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #f3f4f6;
@@ -201,26 +200,43 @@
 
 
 
-        document.getElementById('formulario').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const asient_selecc = asiento_seleccionado.value;
+            document.getElementById('formulario').addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-            console.log({name, email, asient_selecc})
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const asient_selecc = asiento_seleccionado.value;
 
-            if (asient_selecc) {
-                alert(`¡Gracias ${name}! Tu asiento (${selectedSeat}) ha sido reservado con éxito. Confirmación enviada a ${email}.`);
-                selectedSeatInput.value = '';
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                const selectedSeatElement = document.querySelector('.asiento.amarillo');
-                selectedSeatElement.classList.add('rojo');
-                selectedSeatElement.classList.remove('amarillo');
-            } else {
-                alert('Por favor selecciona un asiento antes de continuar.');
-            }
-        });
+                if (!asient_selecc) {
+                    alert('Por favor selecciona un asiento antes para continuar.');
+                    return;
+                }
+
+                const data = {
+                    asiento: asient_selecc,
+                    name: name,
+                    email: email
+                };
+
+                try {
+                    const response = await fetch(URL_API, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.id) {
+                        window.location.href = `ticket.html?id=${result.id}`;
+                    } else {
+                        alert('Hubo un error al procesar tu solicitud. Inténtalo nuevamente.');
+                    }
+                } catch (error) {
+                    console.error('Error en la solicitud:', error);
+                    alert('Ocurrió un error inesperado. Inténtalo más tarde.');
+                }
+            });
     </script>
 </body>
 </html>
