@@ -1,4 +1,4 @@
-const URL_API = "https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/boletera_apilamda"
+const URL_API = "https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/"
 
 const mapa = document.getElementById('mapa_asientos');
 const asiento_seleccionado = document.getElementById('asiento_seleccionado');
