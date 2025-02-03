@@ -10,7 +10,7 @@
         const params = new URLSearchParams(window.location.search);
         const value = params.get('id');
 
-        const URL_API = `https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/getTicket?=${value}`
+        const URL_API = `https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/getTicket?id=${value}`
 
         fetch(URL_API, { method: "GET",})
             .then(response => response.json())
