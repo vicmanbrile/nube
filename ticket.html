@@ -9,7 +9,16 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const value = params.get('id');
-        console.log(value);
+
+        const URL_API = `https://hfxwfbvgsg.execute-api.us-east-1.amazonaws.com/default/getTicket?=${value}`
+
+        fetch(URL_API, { method: "GET",})
+            .then(response => response.json())
+            .then((data)=>{
+                console.log(data)
+            })
+
+
     </script>
 </body>
 </html>
