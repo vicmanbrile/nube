@@ -1,4 +1,4 @@
-# La nube
+# La Nube
 
 [Boletera en Línea](http://daquh13zx2ys8.cloudfront.net/)
 
@@ -19,37 +19,8 @@ El proceso de compra y registro sigue un flujo bien definido:
 6.	Generación del Código QR: Una vez confirmada la compra, el sistema genera un código QR asociado al identificador de la transacción.
 7.	Entrega del Boleto: Se muestra en pantalla y/o se envía por correo el código QR con la confirmación de la reserva.
 
-Documentación de las APIs:
-Obtener asientos ocupados:
-Endpoint: GET /default/
-Respuesta:
-{
-  "asientos_ocupados": [15, 20, 22]
-}
-Reservar un asiento:
-Endpoint: POST /default/
-Cuerpo de la petición:
-{
-    "asiento": "asiento_20",
-    "name": "Juan Vidales",
-    "email": "juan@example.com"
-}
-Respuesta:
-{
-    "disponibilidad": false,
-    "id": "ef87ec8a-e0e1-4705-ab26-068ce5286517"
-}
-Obtener información de un Ticket:
-Endpoint: GET /default/getTicket?id=OSsjU54655DnKIsklsSJkjs157sd6
-Respuesta:
-{
-  "id": "OSsjU54655DnKIsklsSJkjs157sd6",
-  "name": "Jose Eduardo Muñoz",
-  "email": "joseeduardo@example.com",
-  "asiento": "asiento_15"
-}
-
 Código:
+
 El código de las funciones Lambda está estructurado de la siguiente manera:
 1.	Conexión con AWS S3: Se utiliza AWS SDK para recuperar y modificar el archivo data.json.
 2.	Lectura de Datos: Se extrae la información actual de asientos ocupados y compradores.
