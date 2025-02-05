@@ -22,7 +22,7 @@ El proceso de compra y registro sigue un flujo bien definido:
 Código:
 
 El código de las funciones Lambda está estructurado de la siguiente manera:
-1.	Conexión con AWS S3: Se utiliza AWS SDK para recuperar y modificar el archivo data.json.
+1.	Conexión con AWS S3 (Amazon Simple Storage Service): Se utiliza AWS SDK para recuperar y modificar el archivo data.json.
 2.	Lectura de Datos: Se extrae la información actual de asientos ocupados y compradores.
 3.	Procesamiento de la Solicitud: Dependiendo del tipo de petición (GET o POST), se realiza una operación de lectura o escritura.
 4.	Generación de Respuesta: Se devuelve una respuesta JSON indicando el estado de la transacción.
