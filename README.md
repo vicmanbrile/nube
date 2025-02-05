@@ -1,6 +1,71 @@
 # La nube
 
-[Boletera](http://daquh13zx2ys8.cloudfront.net/)
+[Boletera en Línea](http://daquh13zx2ys8.cloudfront.net/)
+
+El presente documento detalla el desarrollo de una boletera en línea, un sistema basado en la nube que permite a los usuarios seleccionar un asiento, registrar su información personal y obtener un código QR que confirma la transacción. Este sistema se apoya en los servicios de Amazon Web Services (AWS) para garantizar escalabilidad y disponibilidad. La finalidad del proyecto es agilizar la compra y gestión de boletos de manera eficiente y segura.
+Arquitectura del Sistema:
+El sistema está compuesto por varios servicios interconectados que garantizan su correcto funcionamiento:
+-	Interfaz Web: Diseñada para ser intuitiva y responsiva, permitiendo a los usuarios seleccionar asientos disponibles y completar la compra.
+-	API Gateway: Gestiona y canaliza las solicitudes HTTP, asegurando que las peticiones sean enrutadas correctamente a las funciones Lambda correspondientes.
+-	Funciones Lambda: Procesan las solicitudes del usuario, verifican la disponibilidad de asientos, registran la información de compra y generan los códigos QR.
+-	S3 (Amazon Simple Storage Service): Almacena el archivo data.json, el cual mantiene un registro actualizado de los asientos ocupados y la información de los compradores.
+Funcionamiento Técnico:
+El proceso de compra y registro sigue un flujo bien definido:
+1.	Selección del Asiento: El usuario accede a la interfaz web y elige un asiento disponible en el mapa de ubicaciones.
+2.	Registro de Datos: Se le solicita ingresar su nombre y correo electrónico para completar la reserva.
+3.	Envío de Petición: La información se envía mediante una solicitud HTTP a API Gateway, que redirige la petición a la función Lambda.
+4.	Validación y Registro: La función Lambda recupera el archivo data.json de S3, verifica la disponibilidad del asiento y, en caso de estar libre, genera un identificador único (UUID) para la compra.
+5.	Almacenamiento en S3: Se actualiza el archivo data.json con la nueva información.
+6.	Generación del Código QR: Una vez confirmada la compra, el sistema genera un código QR asociado al identificador de la transacción.
+7.	Entrega del Boleto: Se muestra en pantalla y/o se envía por correo el código QR con la confirmación de la reserva.
+
+Documentación de las APIs:
+Obtener asientos ocupados:
+Endpoint: GET /default/
+Respuesta:
+{
+  "asientos_ocupados": [15, 20, 22]
+}
+Reservar un asiento:
+Endpoint: POST /default/
+Cuerpo de la petición:
+{
+    "asiento": "asiento_20",
+    "name": "Juan Vidales",
+    "email": "juan@example.com"
+}
+Respuesta:
+{
+    "disponibilidad": false,
+    "id": "ef87ec8a-e0e1-4705-ab26-068ce5286517"
+}
+Obtener información de un Ticket:
+Endpoint: GET /default/getTicket?id=OSsjU54655DnKIsklsSJkjs157sd6
+Respuesta:
+{
+  "id": "OSsjU54655DnKIsklsSJkjs157sd6",
+  "name": "Jose Eduardo Muñoz",
+  "email": "joseeduardo@example.com",
+  "asiento": "asiento_15"
+}
+
+Código:
+El código de las funciones Lambda está estructurado de la siguiente manera:
+1.	Conexión con AWS S3: Se utiliza AWS SDK para recuperar y modificar el archivo data.json.
+2.	Lectura de Datos: Se extrae la información actual de asientos ocupados y compradores.
+3.	Procesamiento de la Solicitud: Dependiendo del tipo de petición (GET o POST), se realiza una operación de lectura o escritura.
+4.	Generación de Respuesta: Se devuelve una respuesta JSON indicando el estado de la transacción.
+5.	Actualización de la Base de Datos: En caso de compra, se guarda la información del usuario y se bloquea el asiento seleccionado.
+Diagramas UML
+
+Diagrama de Clases:
+
+Diagrama de Secuencia:
+
+Diagrama de Casos de Uso:
+
+
+El sistema de boletera en línea implementado es robusto, escalable y seguro. Gracias a la infraestructura serverless de AWS, se garantiza un alto nivel de disponibilidad y rendimiento. La documentación exhaustiva de APIs, junto con el análisis del código y los diagramas UML, facilitan su mantenimiento y futura extensión. Se recomienda futuras mejoras en autenticación de usuarios y optimización de almacenamiento de datos.
 
 # Amazon web services
   - Cloudfront
