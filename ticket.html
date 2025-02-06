@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Código QR</title>
+    <style>
+        html {
+            margin: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0% 25%;
+            padding: 0;
+            width: 50%;
+            display: block;
+            height: 100vh;
+            text-align: center;
+            height: 50vh;
+            padding-bottom: 25vh;
+            padding-top: 25vh;
+        }
+    
+        #qrContainer {
+            margin: 0px;
+            justify-items: center;
+        }
+
+        h1{
+            margin: 0;
+        } 
+        h2 {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
+    <h1>Código QR</h1>
+    <div id="qrContainer"></div>
+    
+    <h2 id="asiento">Asiento:<br></h2>
+    <h2 id="name">Asignado a:<br></h2>
+
+    <script src="qrcode.js"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
         const value = params.get('id');
@@ -16,9 +53,30 @@
             .then(response => response.json())
             .then((data)=>{
                 console.log(data)
+                const qrContainer = document.getElementById('qrContainer');
+                if (data.id != `${value} no encontrado`){
+                    document.getElementById('asiento').innerText += data.asiento.split("_")[1]
+                    document.getElementById('name').innerText += `${data.name}`
+
+    
+                    new QRCode(qrContainer, {
+                        text: `${data.id} es valido`,
+                        width: 200,
+                        height: 200,
+                    });
+                } else {
+                    document.getElementById('asiento').hidden = true
+                    document.getElementById('name').hidden = true
+
+
+                    new QRCode(qrContainer, {
+                        text: `${value} es invalido`,
+                        width: 200,
+                        height: 200,
+                    });
+                }
             })
+</script>
 
-
-    </script>
 </body>
 </html>
