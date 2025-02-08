@@ -53,6 +53,8 @@ El sistema de boletera en línea implementado es robusto, escalable y seguro. Gr
 
 ![Diagrama de clases](./diagramas/clases.svg)
 
+**Diagrama de despliegue:**
+![Diagrama de despliegue](./diagramas/despliegue.svg)
 
 # Base de datos JSON
 Se guarda en **data.json** en bucket **boleteradata**
